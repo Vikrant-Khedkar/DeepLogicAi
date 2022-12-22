@@ -10,4 +10,6 @@ urlpatterns = [
     path('api/logout/', knox_views.LogoutView.as_view(), name='logout'),
     path('api/logoutall/', knox_views.LogoutAllView.as_view(), name='logoutall'),
     path('getpdf/',get_pdf,name='getpdf'),
+    path('home/',home,name='home'),
+    
 ]

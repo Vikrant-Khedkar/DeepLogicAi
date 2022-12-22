@@ -10,13 +10,20 @@ from knox.views import LoginView as KnoxLoginView
 # Create your views here.
 from rest_framework import generics, permissions
 from rest_framework.response import Response
+from django.template import loader  
 from knox.models import AuthToken
+from django.shortcuts import redirect
 from .serializers import UserSerializer, RegisterSerializer
 
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
+# @api_view(['GET'])
+# @permission_classes([IsAuthenticated])
 def get_pdf(request):
-    return HttpResponse("Hi")
+    return render(request,'login.html')
+@api_view(['GET','PUT'])
+@permission_classes([IsAuthenticated])
+def home(request):
+    
+    return render(request,'home.html')
 
 
 # Register API
@@ -38,10 +45,15 @@ class LoginAPI(KnoxLoginView):
     permission_classes = (permissions.AllowAny,)
 
     def post(self, request, format=None):
+        
         serializer = AuthTokenSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         login(request, user)
-        return super(LoginAPI, self).post(request, format=None)
+        context = {
+            'user': user.username
+        }
+        return redirect(home)
+        # return super(LoginAPI, self).post(request, format=None)
 
 

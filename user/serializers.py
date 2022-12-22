@@ -2,6 +2,11 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from . models import *
 
+
+class getpdf(serializers.Serializer):
+    user = serializers.IntegerField()
+    pdf = serializers.URLField()
+
 # User Serializer
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -10,8 +15,8 @@ class UserSerializer(serializers.ModelSerializer):
 
 class DataSerializer(serializers.ModelSerializer):
     class Meta:
-        model = data
-        fields = ('pdf',)
+        model = pdf
+        fields = ('pdf','user')
 
 # Register Serializer
 class RegisterSerializer(serializers.ModelSerializer):

@@ -1,9 +1,13 @@
+
+
 <div style="align-items: center; padding-left: 100; padding-top: 100; margin-left: 500px; border-radius: 10px; border-color: black; height: 300px; width: 500px; background-color:rgb(78, 190, 241); margin-top: 200px;" >
     <form method="POST" action="http://127.0.0.1:8000/api/data/" enctype="multipart/form-data">
         {% csrf_token %}
         <input  name="pdf" id="pdf" style="background-color: white; border-radius: 10px; height: 40; width: 400px;" placeholder="username" type="file">
         <br><br>
+        <input hidden="True" name="user" id="user" style="background-color: white; border-radius: 10px; height: 40; width: 400px;" placeholder="username" type="text" value="{{user.pk}}">
+
         <button  type="submit" style="margin-left:150;background-color:white; border-radius: 20px;height: 40; width: 100px;" >submit</button>
-    
+        
     </form>
     </div>

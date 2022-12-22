@@ -16,5 +16,7 @@ urlpatterns = [
     path('getpdf/',get_pdf,name='getpdf'),
     path('api/',include(router.urls)),
     path('home/',home,name='home'),
+    path('test/',test,name='test'),
+    path('converter/',converter,name='converter')
     
 ]

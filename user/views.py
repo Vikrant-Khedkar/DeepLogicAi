@@ -13,11 +13,30 @@ from rest_framework.response import Response
 from django.template import loader  
 from knox.models import AuthToken
 from django.shortcuts import redirect
+from django.contrib.auth.models import User
 from .serializers import *
 from . models import *
 
-# @api_view(['GET'])
-# @permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated])
+@api_view(['GET'])
+def converter(request): 
+
+    pdfpath = pdf.objects.filter(user=request.user).latest('id')
+    path = pdfpath.pdf.url
+
+    
+    
+    context = {
+        "path" : 'http://localhost:8000/'+path
+    }
+
+    return Response(context)
+ 
+
+
+def test(request):
+    return render(request,'test.html')
+
 def get_pdf(request):
     return render(request,'login.html')
 
@@ -31,7 +50,8 @@ def home(request):
 @permission_classes([IsAuthenticated])
 class DataApi(viewsets.ModelViewSet):
     serializer_class = DataSerializer
-    queryset = data.objects.all()
+    queryset = pdf.objects.all()
+    
 
 
 

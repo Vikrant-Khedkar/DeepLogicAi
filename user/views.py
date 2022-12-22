@@ -13,17 +13,27 @@ from rest_framework.response import Response
 from django.template import loader  
 from knox.models import AuthToken
 from django.shortcuts import redirect
-from .serializers import UserSerializer, RegisterSerializer
+from .serializers import *
+from . models import *
 
 # @api_view(['GET'])
 # @permission_classes([IsAuthenticated])
 def get_pdf(request):
     return render(request,'login.html')
-@api_view(['GET','PUT'])
+
+
+
 @permission_classes([IsAuthenticated])
 def home(request):
-    
     return render(request,'home.html')
+
+
+@permission_classes([IsAuthenticated])
+class DataApi(viewsets.ModelViewSet):
+    serializer_class = DataSerializer
+    queryset = data.objects.all()
+
+
 
 
 # Register API

@@ -1,7 +1,11 @@
 from .views import *
-from django.urls import path
+from django.urls import path,include
 from knox import views as knox_views
 from .views import LoginAPI
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register('data',DataApi)
 
 
 urlpatterns = [
@@ -10,6 +14,7 @@ urlpatterns = [
     path('api/logout/', knox_views.LogoutView.as_view(), name='logout'),
     path('api/logoutall/', knox_views.LogoutAllView.as_view(), name='logoutall'),
     path('getpdf/',get_pdf,name='getpdf'),
+    path('api/',include(router.urls)),
     path('home/',home,name='home'),
     
 ]

@@ -1,0 +1,50 @@
+<style>
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+    }
+    
+    li {
+      float: left;
+    }
+    
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+    
+    li a:hover {
+      background-color: #111;
+    }
+    </style>
+    </head>
+    <body>
+    
+    <ul>
+      
+      <li><a href="/login">Login</a></li>
+      <li><a class="active" href="/upload">Upload</a></li>
+      <li><a href="/display">Display</a></li>
+      <li><a href="/logout">logout</a></li>
+      <li><a style="color: White;  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Hey <span style="color: red;">{{ request.user}} </span>Your PDFs along Text</a></li>
+    </ul>
+<br>
+    <!-- Iterate over object_list -->
+    {% for object in dataset %}
+    <!-- Display Objects -->
+    <a href={{ object.pdf }}>{{ object.pdf}}</a>
+    <li>{{ object.user }}</li>
+    <li>{{ object.text }}</li>
+   
+    <hr/>
+    <!-- If object_list is empty  -->
+    {% empty %}
+    <li>No objects yet.</li>
+    {% endfor %}
+</ul>

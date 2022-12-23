@@ -13,5 +13,17 @@ class pdf(models.Model):
 
     def __str__(self):
         return self.pdf.url
+
+class text(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    pdf = models.ForeignKey(pdf,on_delete=models.CASCADE)
+    text = models.TextField(max_length=2000)
+
+    class Meta:
+        get_latest_by = ['id']
+    
+    def __str__(self):
+        return self.text
+        
         
 

@@ -13,10 +13,12 @@ urlpatterns = [
     path('api/login/', LoginAPI.as_view(), name='login'),
     path('api/logout/', knox_views.LogoutView.as_view(), name='logout'),
     path('api/logoutall/', knox_views.LogoutAllView.as_view(), name='logoutall'),
-    path('getpdf/',get_pdf,name='getpdf'),
+    path('login/',get_pdf,name='login'),
     path('api/',include(router.urls)),
-    path('home/',home,name='home'),
-    path('test/',test,name='test'),
-    path('converter/',converter,name='converter')
+    path('upload/',home,name='upload'),
+    path('convert/',test,name='convert'),
+    path('converter/',converter,name='converter'),
+    path('logout/', logout_view, name='logout'),
+    path('display/',TextDisplay,name='display'),
     
 ]

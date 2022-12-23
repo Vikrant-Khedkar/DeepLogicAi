@@ -3,9 +3,14 @@ from django.contrib.auth.models import User
 from . models import *
 
 
-class getpdf(serializers.Serializer):
-    user = serializers.IntegerField()
-    pdf = serializers.URLField()
+class textSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = text
+        fields = ('text','pdf','user')
+
+# class getpdf(serializers.Serializer):
+    # user = serializers.IntegerField()
+    # pdf = serializers.URLField()
 
 # User Serializer
 class UserSerializer(serializers.ModelSerializer):

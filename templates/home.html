@@ -1,5 +1,41 @@
 
-
+<style>
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+    }
+    
+    li {
+      float: left;
+    }
+    
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+    
+    li a:hover {
+      background-color: #111;
+    }
+    </style>
+    </head>
+    <body>
+    
+    <ul>
+      
+      <li><a href="/login">Login</a></li>
+      <li><a class="active" href="/upload">Upload</a></li>
+      <li><a href="/display">Display</a></li>
+      <li><a href="/logout">logout</a></li>
+      <li><a style="color: White;  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Hey <span style="color: red;">{{ request.user}} </span>Your PDFs along Text</a></li>
+    </ul>
+<br>
 <div style="align-items: center; padding-left: 100; padding-top: 100; margin-left: 500px; border-radius: 10px; border-color: black; height: 300px; width: 500px; background-color:rgb(78, 190, 241); margin-top: 200px;" >
     <form method="POST" action="http://127.0.0.1:8000/api/data/" enctype="multipart/form-data">
         {% csrf_token %}

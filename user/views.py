@@ -15,22 +15,57 @@ from knox.models import AuthToken
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from .serializers import *
+from django.contrib.auth import logout
 from . models import *
+from django.views.generic.list import ListView
+import PyPDF2
+import textract
+import os
+from pathlib import Path
+from django.conf import settings
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+
+def TextDisplay(request):
+        context = {}
+        context ['dataset'] = text.objects.filter(user = request.user)
+        return render(request,'display.html',context)
 
 @permission_classes([IsAuthenticated])
 @api_view(['GET'])
 def converter(request): 
 
-    pdfpath = pdf.objects.filter(user=request.user).latest('id')
-    path = pdfpath.pdf.url
+    serializer_class = textSerializer
 
+    pdfpath = pdf.objects.filter(user=request.user).latest('id')
     
-    
+
+    path = pdfpath.pdf.url
+    pdfpath =  ((str(settings.BASE_DIR))) 
+    pdfpath = pdfpath.replace(os.sep, '/')
+    pdfFile = open((pdfpath+'/static'+path),'rb')
+    pdfReader = PyPDF2.PdfFileReader(pdfFile)
+    pageObj = pdfReader.getPage(0)
+    text = pageObj.extractText()
+    pdfFile.close()
+    print(pdfpath)
+    pdfpath = pdf.objects.filter(user=request.user).latest('id')
+    title =  str(pdfpath),
     context = {
-        "path" : 'http://localhost:8000/'+path
+        
+        "pdf"  :  pdf.objects.filter(user=request.user).latest('id').pk,
+        'user' :  request.user.pk,
+        'title': title,
+        "text" : text,
     }
 
-    return Response(context)
+    serializer = textSerializer(data=context)
+    serializer.is_valid(raise_exception=True)
+    text = serializer.save()   
+  
+
+    return redirect('display')
  
 
 
@@ -51,6 +86,25 @@ def home(request):
 class DataApi(viewsets.ModelViewSet):
     serializer_class = DataSerializer
     queryset = pdf.objects.all()
+   
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        pdf = serializer.save()
+        return redirect(test)
+
+def UserLoggedIn(request):
+    if request.user.is_authenticated == True:
+        username = request.user.username
+    else:
+        username = None
+    return username
+
+def logout_view(request):
+    username = UserLoggedIn(request)
+    if username != None:
+        logout(request)
+    return redirect(get_pdf)
     
 
 

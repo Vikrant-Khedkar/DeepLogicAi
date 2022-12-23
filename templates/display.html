@@ -78,7 +78,7 @@
     </style>  
     {% for object in dataset %}
     <div class="container">
-    <a href={{ object.pdf }}>{{ object.pdf}}</a>
+    <a href={{ object.pdf }}>{{ object.pdf|cut:'/pdf/pdf/'}}</a>
     <li>{{ object.user }}</li>
     <textarea rows="30" cols="100">{{ object.text }}</textarea>
 </div>

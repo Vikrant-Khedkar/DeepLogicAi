@@ -19,7 +19,6 @@ from django.contrib.auth import logout
 from . models import *
 from django.views.generic.list import ListView
 import PyPDF2
-import textract
 import os
 from pathlib import Path
 from django.conf import settings

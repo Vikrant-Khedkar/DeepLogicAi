@@ -10,6 +10,8 @@ class pdf(models.Model):
     class Meta:
         get_latest_by = ['id']
 
+        
+
 
     def __str__(self):
         return self.pdf.url

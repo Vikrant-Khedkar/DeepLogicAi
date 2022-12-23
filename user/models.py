@@ -17,13 +17,13 @@ class pdf(models.Model):
 class text(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     pdf = models.ForeignKey(pdf,on_delete=models.CASCADE)
-    text = models.TextField(max_length=2000)
+    text = models.TextField(max_length=99999999)
 
     class Meta:
         get_latest_by = ['id']
     
     def __str__(self):
         return self.text
-        
+
         
 

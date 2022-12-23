@@ -20,5 +20,6 @@ urlpatterns = [
     path('converter/',converter,name='converter'),
     path('logout/', logout_view, name='logout'),
     path('display/',TextDisplay,name='display'),
+    path('register/',Register,name='register'),
     
 ]

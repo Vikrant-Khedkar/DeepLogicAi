@@ -26,12 +26,13 @@ from django.conf import settings
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-
+#display converted texts
 def TextDisplay(request):
         context = {}
         context ['dataset'] = text.objects.filter(user = request.user)
         return render(request,'display.html',context)
 
+#convert pdf to text
 @permission_classes([IsAuthenticated])
 @api_view(['GET'])
 def converter(request): 
@@ -46,8 +47,11 @@ def converter(request):
     pdfpath = pdfpath.replace(os.sep, '/')
     pdfFile = open((pdfpath+'/static'+path),'rb')
     pdfReader = PyPDF2.PdfFileReader(pdfFile)
-    pageObj = pdfReader.getPage(0)
-    text = pageObj.extractText()
+    text = ''
+    i= pdfReader.numPages
+    for a in range(0,i):
+        pageObj = pdfReader.getPage(a)
+        text = text+ '\n '+pageObj.extractText()    
     pdfFile.close()
     print(pdfpath)
     pdfpath = pdf.objects.filter(user=request.user).latest('id')
@@ -66,22 +70,7 @@ def converter(request):
   
 
     return redirect('display')
- 
-
-
-def test(request):
-    return render(request,'test.html')
-
-def get_pdf(request):
-    return render(request,'login.html')
-
-
-
-@permission_classes([IsAuthenticated])
-def home(request):
-    return render(request,'home.html')
-
-
+#get all data
 @permission_classes([IsAuthenticated])
 class DataApi(viewsets.ModelViewSet):
     serializer_class = DataSerializer
@@ -92,7 +81,8 @@ class DataApi(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         pdf = serializer.save()
         return redirect(test)
-
+        
+#check if user is logged in
 def UserLoggedIn(request):
     if request.user.is_authenticated == True:
         username = request.user.username
@@ -100,13 +90,12 @@ def UserLoggedIn(request):
         username = None
     return username
 
+#logout a user
 def logout_view(request):
     username = UserLoggedIn(request)
     if username != None:
         logout(request)
     return redirect(get_pdf)
-    
-
 
 
 
@@ -118,13 +107,10 @@ class RegisterAPI(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
-        return Response({
-        "user": UserSerializer(user, context=self.get_serializer_context()).data,
-        "token": AuthToken.objects.create(user)[1]
-        })
+        return redirect(get_pdf)
 
 
-
+#loginAPI
 class LoginAPI(KnoxLoginView):
     permission_classes = (permissions.AllowAny,)
 
@@ -141,3 +127,17 @@ class LoginAPI(KnoxLoginView):
         # return super(LoginAPI, self).post(request, format=None)
 
 
+#return register page
+def Register(request):
+    return render(request,'register.html')
+#return convert page
+def test(request):
+    return render(request,'test.html')
+#return login page
+def get_pdf(request):
+    return render(request,'login.html')
+
+#return upload page
+@permission_classes([IsAuthenticated])
+def home(request):
+    return render(request,'home.html')

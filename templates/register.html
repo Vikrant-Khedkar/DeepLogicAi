@@ -35,11 +35,11 @@
       <li><a style="color: White;  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Hey <span style="color: red;">{{ request.user}} </span>Your PDFs along Text</a></li>
     </ul>
 <br>
- 
+
 <style>   
     Body {  
       font-family: Calibri, Helvetica, sans-serif;  
-      background-color: pink;  
+      background-color: #BFEAF5;  
     }  
     button {   
            background-color: #4CAF50;   
@@ -53,7 +53,7 @@
      form {   
             border: 3px solid #f1f1f1;   
         }   
-     input[type=text], input[type=password] {   
+     input {   
             width: 100%;   
             margin: 8px 0;  
             padding: 12px 20px;   
@@ -71,20 +71,25 @@
         }   
             
          
-        .container {   
+     .container {   
             padding: 25px;   
             background-color: #82AAE3;  
         }   
-    </style>  
-    {% for object in dataset %}
-    <div class="container">
-    <a href={{ object.pdf }}>{{ object.pdf}}</a>
-    <li>{{ object.user }}</li>
-    <textarea rows="30" cols="100">{{ object.text }}</textarea>
-</div>
-    <hr/>
-   
-    {% empty %}
-    <li>No objects yet.</li>
-    {% endfor %}
-</ul>
+    </style>   
+    </head>    
+    <body>    
+        {% csrf_token %}
+        <center> <h1> SignUp  </h1> </center>   
+        <form method="POST" action="http://localhost:8000/api/register/" enctype="multipart/form-data">  
+            <div class="container">   
+                <label>Username : </label>   
+                <input type="text" placeholder="Enter Username" name="username" required>  
+                <label>Email : </label>   
+                <input type="email" placeholder="Enter Email" name="email" required>  
+                <label>Password : </label>   
+                <input type="password" placeholder="Enter Password" name="password" required>  
+                <button type="submit">SignUp</button>   
+                 
+              
+            </div>   
+        </body>  

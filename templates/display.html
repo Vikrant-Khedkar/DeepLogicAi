@@ -73,14 +73,23 @@
          
         .container {   
             padding: 25px;   
-            background-color: #82AAE3;  
+            background-color:white;  
+            
         }   
     </style>  
     {% for object in dataset %}
-    <div class="container">
-    <a href={{ object.pdf }}>{{ object.pdf|cut:'/pdf/pdf/'}}</a>
-    <li>{{ object.user }}</li>
+    <div  class="container">
+      <div>
+        <center>
+    
+    <li style="font-size: 20;">{{ object.user }}</li>
+    <br>
+    <br>
     <textarea rows="30" cols="100">{{ object.text }}</textarea>
+    <br>
+    <a href={{ object.pdf }}>{{ object.pdf|cut:'/pdf/pdf/'}}</a>
+    </div>
+  </center>
 </div>
     <hr/>
    

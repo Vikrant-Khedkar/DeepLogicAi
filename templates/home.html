@@ -91,16 +91,16 @@
         </head>    
         <body>    
             
-            <center> <h1> Login  </h1> </center>   
+            <center> <h1> Upload Your PDF  </h1> </center>   
             <form method="POST" action="http://127.0.0.1:8000/api/data/" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="container">   
-                    <label>Username : </label>   
+                    <label>PDF : </label>   
                     <input  name="pdf" id="pdf" placeholder="username" type="file">
                     <br><br>
                     <input  name="user" id="user" placeholder="username" type="hidden" value="{{user.pk}}">
             
-                    <button  type="submit" >submit</button>
+                    <button  type="submit" >Upload</button>
                     
                      
                   

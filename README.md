@@ -2,15 +2,15 @@
 
 ## Approach
 
-I had to create a PDF to text converter where user can save his pdf and convert it to text.
+- I had to create a PDF to text converter where user can save his pdf and convert it to text.
 
-So i started with creating user login and resgistration API's
+- So i started with creating user login and resgistration API's
 
-After that I created API's to upload and save PDF's
+- After that I created API's to upload and save PDF's
 
-Then I added logic to Convert pdf to text and save it using serializers
+- Then I added logic to Convert pdf to text and save it using serializers
 
-After that i created Api to Retrive the pdf and texts uploaded by logged in user
+- After that i created Api to Retrive the pdf and texts uploaded by logged in user
 
 ##  Challenges 
 
@@ -59,3 +59,14 @@ Start the devlopment server
 ```
 Go to localhost:8000/login
 And you are good to go
+
+# API endpoints
+
+| Parameter | Type     |
+| :-------- | :------- |
+| `/api/login` | Login user |
+| `/api/logout` | Logout user |
+| `/api/register`  | Signu Up user |
+| `/converter` |  Convert pdf to text |
+
+

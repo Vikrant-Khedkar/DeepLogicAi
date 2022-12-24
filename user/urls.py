@@ -14,6 +14,7 @@ urlpatterns = [
     path('api/logout/', knox_views.LogoutView.as_view(), name='logout'),
     path('api/logoutall/', knox_views.LogoutAllView.as_view(), name='logoutall'),
     path('login/',get_pdf,name='login'),
+    path('',get_pdf),
     path('api/',include(router.urls)),
     path('upload/',home,name='upload'),
     path('convert/',test,name='convert'),

@@ -1,5 +1,7 @@
 # PDF To Text Converter
 
+# Video
+[Video](https://drive.google.com/file/d/1q9_gQ4ozRCI60npcPtr1suT-do3n0Knl/view?usp=share_link)
 ## Approach
 
 - I had to create a PDF to text converter where user can save his pdf and convert it to text.

@@ -71,4 +71,11 @@ And you are good to go
 | `/api/register`  | Signu Up user |
 | `/converter` |  Convert pdf to text |
 
+# What would I add if i have more time
+
+- Image to Text
+- PDF OCR
+- Word to Text
+- Deployment
+
 
